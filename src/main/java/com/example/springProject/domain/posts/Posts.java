@@ -1,6 +1,7 @@
 package com.example.springProject.domain.posts;
 
 
+import com.example.springProject.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity // 테이블과 링크될 클래스임을 나타냄. 기본값으로 클래스의 카멜케이스 이름을 언더스코어 네이밍으로 테이블 이름을 매칭함
-public class Posts { // 실제 DB의 테이블과 매칭될 클래스이며 보통 Entity 클래스라고도 함. JPA사용하면 DB데이터에 작업할 경우 실제 쿼리를 날리기 보다 이 Entity 클래스의 수정을 통해(??) 작업할 수 있음
+public class Posts extends BaseTimeEntity { // 실제 DB의 테이블과 매칭될 클래스이며 보통 Entity 클래스라고도 함. JPA사용하면 DB데이터에 작업할 경우 실제 쿼리를 날리기 보다 이 Entity 클래스의 수정을 통해(??) 작업할 수 있음
 
     @Id // 해당 필드의 PK필드를 나타냄
     @GeneratedValue(strategy = GenerationType.IDENTITY) // PK의 생성 규칙을 나타냄. strategy = GenerationType.IDENTITY는 auto_increment옵션
@@ -29,6 +30,11 @@ public class Posts { // 실제 DB의 테이블과 매칭될 클래스이며 보�
         this.title = title;
         this.content = content;
         this.author = author;
+    }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
     }
 }
 // Setter 메소드가 없다는 특이점
